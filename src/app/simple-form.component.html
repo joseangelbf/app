@@ -1,31 +1,35 @@
 <h1>Aareon Angular Test</h1>
-<form #testForm="ngForm" (ngSubmit)="onSubmit(testForm.value)">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
     <div class="values">
       <label for="title">Title</label>
-      <select id="title" name="title" [(ngModel)]="title">
+      <select formControlName="title">
         <option value="">-- Select an option --</option>
-        <option *ngFor="let title of titles;">
+        <option id="title" name="title" *ngFor="let title of titles;" [ngValue]="title.name">
           {{ title.name }}
       </select>
     </div>
     <div class="values">
       <label for="firstName">First name</label>
-      <input id="firstName" name="firstName" type="text" placeholder="First name" [(ngModel)]="firstName"/>
+      <input id="firstName" name="firstName" type="text" placeholder="First name" formControlName="firstName"/>
     </div>
     <div class="values">
       <label for="lastName">Last name</label>
       <input id="lastName" name="lastName" type="text" placeholder="Last name"  
-        [(ngModel)]="lastName" required/>
+        formControlName="lastName"  [ngClass]="(form.invalid && form.controls['lastName']?.touched) ||
+        (submitted && form.invalid) ? 'is-invalid' : ''" required/>
     </div>
-    <!-- TODO: add error message -->
+    <div *ngIf="(form.invalid && form.controls['lastName']?.touched) ||
+      (submitted && form.invalid)"  class="is-invalid">
+        *Last name is mandatory.
+    </div>
     <span></span>
     <div>
-      <input id="acceptTerms" name="acceptTerms" type="checkbox" [(ngModel)]="acceptTerms"/>
+      <input id="acceptTerms" name="acceptTerms" type="checkbox" (change)="isChecked()" formControlName="acceptTerms"/>
       <label>I accept the terms & conditions</label>
     </div>
     <div class="button">
-      <button type="submit" [disabled]="!acceptTerms" >Submit</button>
+      <button type="submit" [disabled]="disabled">Submit</button>
     </div>
   </div>
 </form>

@@ -21,6 +21,14 @@ div.button {
     float: right;
 }
 
+div.is-invalid{
+    color: red;
+}
+
+input.is-invalid {
+    border-color: rgba(255,10,29,1) !important;
+}
+
 @media (max-width: 800px) {
     div.values select {
         margin-left: -16px;
