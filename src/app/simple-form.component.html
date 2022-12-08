@@ -2,25 +2,26 @@
 <form #testForm="ngForm" (ngSubmit)="onSubmit(testForm.value)">
   <div>
     <div class="values">
-      <label>Title</label>
-      <select name="title" [(ngModel)]="title">
+      <label for="title">Title</label>
+      <select id="title" name="title" [(ngModel)]="title">
         <option value="">-- Select an option --</option>
         <option *ngFor="let title of titles;">
           {{ title.name }}
       </select>
     </div>
     <div class="values">
-      <label>First name</label>
-      <input type="text" placeholder="First name" name="firstName" [(ngModel)]="firstName"/>
+      <label for="firstName">First name</label>
+      <input id="firstName" name="firstName" type="text" placeholder="First name" [(ngModel)]="firstName"/>
     </div>
     <div class="values">
-      <label>Last name</label>
-      <input type="text" required placeholder="Last name" name="lastName" [(ngModel)]="lastName"/>
+      <label for="lastName">Last name</label>
+      <input id="lastName" name="lastName" type="text" placeholder="Last name"  
+        [(ngModel)]="lastName" required/>
     </div>
     <!-- TODO: add error message -->
     <span></span>
     <div>
-      <input type="checkbox" name="acceptTerms" [(ngModel)]="acceptTerms"/>
+      <input id="acceptTerms" name="acceptTerms" type="checkbox" [(ngModel)]="acceptTerms"/>
       <label>I accept the terms & conditions</label>
     </div>
     <div class="button">
